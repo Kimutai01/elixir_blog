@@ -27,7 +27,7 @@
   </.modal>
 <% end %>
 
-<%= if @live_action in [:messages] do %>
+<%= if @live_action in [:messages, :edit_message] do %>
    <.modal return_to={Routes.blog_show_path(@socket, :show, @blog)}>
     <.live_component
       module={ElixirBlogWeb.MessageLive.FormComponent}
@@ -58,8 +58,15 @@
     <%= @blog.description %>
   </li>
 
+  <%= for message <- @blog.messages do %>
+    <li>
+      <strong>Messages:</strong>
+      <%= message.content %>
+    </li>
+  <% end %>
 </ul>
 
 <span><%= live_patch "Edit", to: Routes.blog_show_path(@socket, :edit, @blog), class: "button" %></span> |
 <span><%= live_redirect "Back", to: Routes.blog_index_path(@socket, :index) %></span>
 <span><%= live_redirect "Add Review", to: Routes.blog_show_path(@socket, :add_reviews, @blog) %></span>
+<span><%= live_redirect "Add Message", to: Routes.blog_show_path(@socket, :messages, @blog) %></span>

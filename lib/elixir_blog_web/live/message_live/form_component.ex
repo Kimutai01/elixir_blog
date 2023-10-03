@@ -27,7 +27,7 @@ defmodule ElixirBlogWeb.MessageLive.FormComponent do
     save_message(socket, socket.assigns.action, message_params)
   end
 
-  defp save_message(socket, :edit, message_params) do
+  defp save_message(socket, :edit_message, message_params) do
     case Messages.update_message(socket.assigns.message, message_params) do
       {:ok, _message} ->
         {:noreply,

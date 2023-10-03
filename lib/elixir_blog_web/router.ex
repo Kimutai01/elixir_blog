@@ -29,6 +29,7 @@ defmodule ElixirBlogWeb.Router do
     live "/blogs/:id/show/edit", BlogLive.Show, :edit
     live "/blogs/:id/add_reviews", BlogLive.Show, :add_reviews
     live "/blogs/:id/messages", BlogLive.Show, :messages
+    live "/blogs/:id/messages/:message_id/edit", BlogLive.Show, :edit_message
   end
 
   # Other scopes may use custom stacks.

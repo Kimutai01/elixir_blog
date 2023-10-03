@@ -35,7 +35,7 @@ defmodule ElixirBlog.Blogs do
       ** (Ecto.NoResultsError)
 
   """
-  def get_blog!(id), do: Repo.get!(Blog, id)
+  def get_blog!(id), do: Repo.get!(Blog, id) |> Repo.preload(:reviews) |> Repo.preload(:messages)
 
   @doc """
   Creates a blog.
