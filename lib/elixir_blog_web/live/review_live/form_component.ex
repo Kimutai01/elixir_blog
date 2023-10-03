@@ -10,7 +10,7 @@ defmodule ElixirBlogWeb.ReviewLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
-     
+
      |> assign(:changeset, changeset)}
   end
 
@@ -28,7 +28,7 @@ defmodule ElixirBlogWeb.ReviewLive.FormComponent do
     save_review(socket, socket.assigns.action, review_params)
   end
 
-  defp save_review(socket, :edit, review_params) do
+  defp save_review(socket, :edit_review, review_params) do
     case Reviews.update_review(socket.assigns.review, review_params) do
       {:ok, _review} ->
         {:noreply,

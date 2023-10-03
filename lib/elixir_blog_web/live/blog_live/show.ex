@@ -6,10 +6,11 @@ defmodule ElixirBlogWeb.BlogLive.Show do
   alias ElixirBlog.Messages.Message
   alias ElixirBlog.Messages
   alias ElixirBlog.Reviews.Review
+  alias ElixirBlog.Reviews
 
   @impl true
   def mount(params, _session, socket) do
-    IO.inspect params
+    IO.inspect(params["review_id"])
 
 
     message = if params["message_id"] do
@@ -17,8 +18,19 @@ defmodule ElixirBlogWeb.BlogLive.Show do
     else
       %Message{}
     end
+
+    review = if params["review_id"] do
+      Reviews.get_review!(params["review_id"])
+    else
+      %Review{}
+    end
+
+
+
+
+
     {:ok, socket
-    |> assign(:review, %Review{})
+    |> assign(:review, review)
     |> assign(:message, message)
   }
   end
@@ -39,4 +51,5 @@ defmodule ElixirBlogWeb.BlogLive.Show do
   defp page_title(:add_reviews), do: "Add Review"
   defp page_title(:messages), do: "Messages"
   defp page_title(:edit_message), do: "Edit Message"
+  defp page_title(:edit_review), do: "Edit Review"
 end

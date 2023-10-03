@@ -13,7 +13,7 @@
   </.modal>
 <% end %>
 
-<%= if @live_action in [:add_reviews] do %>
+<%= if @live_action in [:add_reviews, :edit_review] do %>
    <.modal return_to={Routes.blog_show_path(@socket, :show, @blog)}>
     <.live_component
       module={ElixirBlogWeb.ReviewLive.FormComponent}
@@ -41,6 +41,8 @@
   </.modal>
 <% end %>
 
+
+
 <ul>
 
   <li>
@@ -62,7 +64,20 @@
     <li>
       <strong>Messages:</strong>
       <%= message.content %>
+
+     
     </li>
+     <%= live_redirect "Edit", to: Routes.blog_show_path(@socket, :edit_message,@blog.id, message) %>
+  <% end %>
+
+  <%= for review <- @blog.reviews do %>
+    <li>
+      <strong>Reviews:</strong>
+      <%= review.name %>
+       <%= live_redirect "Edit", to: Routes.blog_show_path(@socket, :edit_review,@blog.id, review) %>
+     
+    </li>
+     <%!-- <%= live_redirect "Edit", to: Routes.blog_show_path(@socket, :edit_message,@blog.id, message) %> --%>
   <% end %>
 </ul>
 
