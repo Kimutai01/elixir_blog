@@ -13,6 +13,34 @@
   </.modal>
 <% end %>
 
+<%= if @live_action in [:add_reviews] do %>
+   <.modal return_to={Routes.blog_show_path(@socket, :show, @blog)}>
+    <.live_component
+      module={ElixirBlogWeb.ReviewLive.FormComponent}
+      id={@review.id || :new}
+      title={@page_title}
+      blog = {@blog}
+      action={@live_action}
+      review={@review}
+      <.modal return_to={Routes.blog_show_path(@socket, :show, @blog)}
+    />
+  </.modal>
+<% end %>
+
+<%= if @live_action in [:messages] do %>
+   <.modal return_to={Routes.blog_show_path(@socket, :show, @blog)}>
+    <.live_component
+      module={ElixirBlogWeb.MessageLive.FormComponent}
+      id={@review.id || :new}
+      title={@page_title}
+      blog = {@blog}
+      action={@live_action}
+      message={@message}
+      <.modal return_to={Routes.blog_show_path(@socket, :show, @blog)}
+    />
+  </.modal>
+<% end %>
+
 <ul>
 
   <li>
@@ -34,3 +62,4 @@
 
 <span><%= live_patch "Edit", to: Routes.blog_show_path(@socket, :edit, @blog), class: "button" %></span> |
 <span><%= live_redirect "Back", to: Routes.blog_index_path(@socket, :index) %></span>
+<span><%= live_redirect "Add Review", to: Routes.blog_show_path(@socket, :add_reviews, @blog) %></span>

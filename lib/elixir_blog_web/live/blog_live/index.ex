@@ -1,6 +1,9 @@
 defmodule ElixirBlogWeb.BlogLive.Index do
   use ElixirBlogWeb, :live_view
 
+  alias ElixirBlog.Reviews
+  alias ElixirBlog.Reviews.Review
+
   alias ElixirBlog.Blogs
   alias ElixirBlog.Blogs.Blog
 
@@ -18,7 +21,7 @@ defmodule ElixirBlogWeb.BlogLive.Index do
     IO.inspect(Blogs.get_blog!(id))
     socket
     |> assign(:page_title, "Edit Blog")
-    |> assign(:kim , "Kim")
+    |> assign(:review, Reviews.get_review!(id))
     |> assign(:blog, Blogs.get_blog!(id))
   end
 
@@ -27,12 +30,14 @@ defmodule ElixirBlogWeb.BlogLive.Index do
     socket
     |> assign(:page_title, "New Blog")
     |> assign(:kim , "Kim")
+    |> assign(:review, %Review{})
     |> assign(:blog, %Blog{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Listing Blogs")
+    |> assign(:review, %Review{})
     |> assign(:blog, nil)
   end
 

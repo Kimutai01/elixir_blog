@@ -6,6 +6,8 @@ defmodule ElixirBlog.Blogs.Blog do
     field :name, :string
     field :description, :string
     field :title, :string
+    has_many :reviews, ElixirBlog.Reviews.Review
+    has_many :messages, ElixirBlog.Messages.Message
 
     timestamps()
   end
