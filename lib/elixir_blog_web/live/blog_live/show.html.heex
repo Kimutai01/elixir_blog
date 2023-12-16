@@ -31,7 +31,7 @@
    <.modal return_to={Routes.blog_show_path(@socket, :show, @blog)}>
     <.live_component
       module={ElixirBlogWeb.MessageLive.FormComponent}
-      id={@review.id || :new}
+      id={@message.id || :new}
       title={@page_title}
       blog = {@blog}
       action={@live_action}

@@ -20,8 +20,12 @@
     <%= error_tag f, :name %>
   
     <%= label f, :description %>
-    <%= text_input f, :description %>
+    <%= textarea f, :description, phx_hook: "CkEditorHook", id: "description", phx_debounce: "blur" %>
+
+
     <%= error_tag f, :description %>
+
+    
   
     <div>
       <%= submit "Save", phx_disable_with: "Saving..." %>

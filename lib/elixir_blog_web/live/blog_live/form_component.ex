@@ -27,6 +27,7 @@ defmodule ElixirBlogWeb.BlogLive.FormComponent do
     save_blog(socket, socket.assigns.action, blog_params)
   end
 
+
   defp save_blog(socket, :edit, blog_params) do
     case Blogs.update_blog(socket.assigns.blog, blog_params) do
       {:ok, _blog} ->

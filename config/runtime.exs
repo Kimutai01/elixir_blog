@@ -20,6 +20,15 @@ if System.get_env("PHX_SERVER") do
   config :elixir_blog, ElixirBlogWeb.Endpoint, server: true
 end
 
+if config_env() == :prod or config_env() == :dev do
+  # Configuring the mailer
+  config :elixir_blog, ElixirBlog.Mailer,
+    adapter: Swoosh.Adapters.Sendgrid,
+    api_key: System.get_env("SENDGRID_API_KEY")
+
+  config :swoosh, :api_client, Swoosh.ApiClient.Finch
+end
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
